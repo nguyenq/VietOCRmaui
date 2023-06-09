@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="VietOCR.Views.ChangCasePopup">
+    <VerticalStackLayout RadioButtonGroup.GroupName="{Binding GroupName}" RadioButtonGroup.SelectedValue="{Binding Selection}" Padding="20">
+        <Label Text="Letter Case" HorizontalOptions="Center" FontAttributes="Bold"></Label>
+        <RadioButton Content="Sentence case" Value="Sentence_case"></RadioButton>
+        <RadioButton Content="lower case" Value="lowercase"></RadioButton>
+        <RadioButton Content="UPPER CASE" Value="UPPERCASE"></RadioButton>
+        <RadioButton Content="Title Case" Value="Title_Case"></RadioButton>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Button Text="Change" Clicked="ButtonChange_Clicked"></Button>
+            <Button Text="Close" Clicked="ButtonClose_Clicked"></Button>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</toolkit:Popup>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:local="clr-namespace:VietOCR.Views"
+               x:Class="VietOCR.Views.BulkOcrPopup">
+    <ScrollView VerticalScrollBarVisibility="Default">
+        <VerticalStackLayout Padding="20">
+            <Label Text="Bulk OCR" HorizontalOptions="Center" FontAttributes="Bold"></Label>
+            <HorizontalStackLayout Margin="10">
+                <Label Text="Input Folder:" WidthRequest="120" VerticalOptions="Center"></Label>
+                <Entry x:Name="inputFolder" WidthRequest="300" IsReadOnly="true" Text="{Binding InputDir}"></Entry>
+                <Button Text="…" Margin="10,0" Command="{Binding SetInputDirCommand}"></Button>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Margin="10">
+                <Label Text="Output Folder:" WidthRequest="120" VerticalOptions="Center"></Label>
+                <Entry x:Name="outputFolder" WidthRequest="300" IsReadOnly="true" Text="{Binding OutputDir}"></Entry>
+                <Button Text="…" Margin="10,0" Command="{Binding SetOutputDirCommand}"></Button>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Margin="10">
+                <local:ComboBox x:Name="combobox" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button Text="Run" Clicked="ButtonRun_Clicked"></Button>
+                <Button Text="Close" Clicked="ButtonClose_Clicked"></Button>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</toolkit:Popup>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:foldable="clr-namespace:Microsoft.Maui.Controls.Foldable;assembly=Microsoft.Maui.Controls.Foldable"
+             xmlns:drawables="clr-namespace:VietOCR.Drawables"
+             xmlns:viewmodels="clr-namespace:VietOCR.ViewModels"
+             x:Class="VietOCR.Views.Gui"
+             Title="VietOCR">
+    <ContentPage.BindingContext>
+        <viewmodels:HelpViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="File">
+            <MenuFlyoutItem Text="Open…" Command="{Binding OpenFileCommand}" />
+            <MenuFlyoutItem Text="Save" Command="{Binding SaveCommand}" />
+            <MenuFlyoutItem Text="Save As…" Command="{Binding SaveAsCommand}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutSubItem x:Name="recentFilesMenuFlyoutSubItem" Text="Recent Files" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="Exit" Command="{Binding ExitCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="Command">
+            <MenuFlyoutItem Text="OCR" Command="{Binding OCRCommand}" />
+            <MenuFlyoutItem Text="OCR All Pages" Command="{Binding OCRAllCommand}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="Bulk OCR…"
+                            Command="{Binding BulkOCRCommand}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="Post Process"
+                            Command="{Binding PostProcessCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="Image">
+            <MenuFlyoutItem Text="Properties"
+                            Command="{Binding ImagePropertiesCommand}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutSubItem Text="Filters…">
+                <MenuFlyoutItem Text="Black"
+                                Command="{Binding AboutCommand}"
+                                CommandParameter="Redmond" />
+                <MenuFlyoutItem Text="White"
+                                Command="{Binding AboutCommand}"
+                                CommandParameter="London" />
+                <MenuFlyoutItem Text="Blue"
+                                Command="{Binding AboutCommand}"
+                                CommandParameter="Berlin"/>
+            </MenuFlyoutSubItem>
+            <MenuFlyoutItem Text="Deskew"
+                            Command="{Binding AboutCommand}" />
+            <MenuFlyoutItem Text="Autocrop"
+                            Command="{Binding AboutCommand}" />
+            <MenuFlyoutItem Text="Crop"
+                            Command="{Binding AboutCommand}" />
+            <MenuFlyoutItem Text="Remove Lines"
+                            Command="{Binding AboutCommand}" />
+            <MenuFlyoutItem Text="Remove Speckles"
+                            Command="{Binding AboutCommand}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="Undo"
+                            Command="{Binding AboutCommand}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="Double-sided Pages"
+                            Command="{Binding AboutCommand}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="Screenshot Mode"
+                            Command="{Binding AboutCommand}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="Show Segmented Regions"
+                            Command="{Binding AboutCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="Format">
+            <MenuFlyoutItem Text="Font…"
+                            Command="{Binding FontCommand}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="Change Case…"
+                            Command="{Binding ChangeCaseCommand}" />
+            <MenuFlyoutItem Text="Remove Line Breaks"
+                            Command="{Binding RemoveLineBreaksCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="Settings">
+            <MenuFlyoutSubItem Text="User Inteface Language"
+                            Command="{Binding HelpCommand}">
+                <MenuFlyoutItem Text="English"
+                                Command="{Binding AboutCommand}"
+                                CommandParameter="eng" />
+                <MenuFlyoutItem Text="Vietnamese"
+                                Command="{Binding AboutCommand}"
+                                CommandParameter="vie" />
+                <MenuFlyoutItem Text="French"
+                                Command="{Binding AboutCommand}"
+                                CommandParameter="fra"/>
+            </MenuFlyoutSubItem>
+            <MenuFlyoutSubItem Text="Download Data…"
+                            Command="{Binding AboutCommand}">
+                <MenuFlyoutItem Text="Spanish"
+                                Command="{Binding AboutCommand}"
+                                CommandParameter="spn" />
+                <MenuFlyoutItem Text="French"
+                                Command="{Binding AboutCommand}"
+                                CommandParameter="fra" />
+                <MenuFlyoutItem Text="Portugese"
+                                Command="{Binding AboutCommand}"
+                                CommandParameter="por"/>
+            </MenuFlyoutSubItem>
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="Page Segmentation Mode..." 
+                              Command="{Binding PsmCommand}">
+            </MenuFlyoutItem>
+            <MenuFlyoutItem Text="OCR Engine Mode..."
+                            Command="{Binding OemCommand}">
+            </MenuFlyoutItem>
+        </MenuBarItem>
+        <MenuBarItem Text="Tools">
+            <MenuFlyoutItem Text="Merge TIFF…"
+                            Command="{Binding MergeTIFFCommand}" />
+            <MenuFlyoutItem Text="Split TIFF…"
+                            Command="{Binding SplitTIFFCommand}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="Merge PDF…"
+                            Command="{Binding MergePDFCommand}" />
+            <MenuFlyoutItem Text="Split PDF…"
+                            Command="{Binding SplitPDFCommand}" />
+            <MenuFlyoutItem Text="Conver PDF to TIFF…"
+                            Command="{Binding ConverPDFtoTIFFCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="About">
+            <MenuFlyoutItem Text="Help"
+                            Command="{Binding HelpCommand}" />
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="About VietOCR"
+                            Command="{Binding AboutCommand}" />
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="Icons/fatcow/open.png" ToolTipProperties.Text="Open File" Command="{Binding OpenFileCommand}"></ToolbarItem>
+        <ToolbarItem IconImageSource="Icons/fatcow/save.png" ToolTipProperties.Text="Save" Command="{Binding SaveCommand}"></ToolbarItem>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesomeSolid"
+                                 Glyph="|"
+                                 Size="Medium" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem IconImageSource="Icons/fatcow/document_page_previous.png" ToolTipProperties.Text="Previous Image" Command="{Binding PreviousImageCommand}"></ToolbarItem>
+        <ToolbarItem IconImageSource="Icons/fatcow/document_page_next.png" ToolTipProperties.Text="Next Image" Command="{Binding NextImageCommand}"></ToolbarItem>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesomeSolid"
+                                 Glyph="|"
+                                 Size="Medium" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem IconImageSource="Icons/fatcow/ocr.png" ToolTipProperties.Text="OCR" Command="{Binding OCRCommand}"></ToolbarItem>
+        <ToolbarItem IconImageSource="Icons/fatcow/draw_eraser.png" ToolTipProperties.Text="Clear Textbox" Command="{Binding ClearCommand}"></ToolbarItem>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesomeSolid"
+                                 Glyph="|"
+                                 Size="Medium" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem IconImageSource="Icons/fatcow/gear_in.png" ToolTipProperties.Text="Post Process" Command="{Binding PostProcessCommand}"></ToolbarItem>
+        <ToolbarItem IconImageSource="Icons/fatcow/pilcrow_delete.png" ToolTipProperties.Text="Remove Line Breaks" Command="{Binding RemoveLineBreaksCommand}"></ToolbarItem>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesomeSolid"
+                                 Glyph="|"
+                                 Size="Medium" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Text="{Binding CurLangCode}" Command="{Binding ChangeOCRLanguageCommand}">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <foldable:TwoPaneView x:Name="twoPaneView">
+        <foldable:TwoPaneView.Pane1
+        BackgroundColor="#dddddd">
+            <ScrollView Orientation="Both" HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Default">
+                <VerticalStackLayout>
+                    <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" />
+                    <Image x:Name="imageControl" WidthRequest="{Binding ImageWidth}" HeightRequest="{Binding ImageHeight}" Source="{Binding ImageSource}" />
+                    <drawables:ImageGraphicsView x:Name="gview" Image="{Binding CurrentImage}" HorizontalOptions="Fill" HeightRequest="600" WidthRequest="400">
+                        <drawables:ImageGraphicsView.Drawable>
+                            <drawables:LoadImageDrawable />
+                        </drawables:ImageGraphicsView.Drawable>
+                    </drawables:ImageGraphicsView>
+                </VerticalStackLayout>
+            </ScrollView>
+        </foldable:TwoPaneView.Pane1>
+        <foldable:TwoPaneView.Pane2>
+            <ScrollView x:Name="scrollView" VerticalOptions="FillAndExpand" HorizontalScrollBarVisibility="Always"
+                    VerticalScrollBarVisibility="Always">
+                <Editor x:Name="editor" Placeholder="OCR results" Background="White"
+					        VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Start"
+					        AutoSize="TextChanges" 
+                            Text="{Binding Text}"
+                            CursorPosition="{Binding CursorPosition}"
+                            SelectionLength="{Binding SelectionLength}"
+                        />
+            </ScrollView>
+        </foldable:TwoPaneView.Pane2>
+    </foldable:TwoPaneView>
+</ContentPage>

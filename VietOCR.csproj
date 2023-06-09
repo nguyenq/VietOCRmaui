@@ -1,0 +1,326 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.20348.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
+		<OutputType>Exe</OutputType>
+		<RootNamespace>VietOCR</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- Display name -->
+		<ApplicationTitle>VietOCR</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.vietocr</ApplicationId>
+		<ApplicationIdGuid>eccd15bc-d118-4f0b-bd5e-1bc48000582d</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.20348.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.20348.0</TargetPlatformMinVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BitMiracle.LibTiff.NET" Version="2.4.649" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls.Foldable" Version="7.0.86" />
+		<PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="7.0.86" />
+		<PackageReference Include="Tesseract" Version="5.2.0" />
+		<PackageReference Include="Tesseract.Data.English" Version="4.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="tessdata\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\BulkOcrPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\OemPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\OcrLanguagePopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PsmPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ChangCasePopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Data\ces.DangAmbigs.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Data\eng.DangAmbigs.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Data\ISO639-1.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Data\ISO639-3.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Data\OO-SpellDictionaries.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Data\san.DangAmbigs.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Data\slk.DangAmbigs.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Data\TessLangDataURL.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Data\vie.DangAmbigs.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\configs\bazaar">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\configs\digits">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\configs\hocr">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\configs\pdf">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\configs\quiet">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\configs\tess_configs">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\configs\tess_configvars">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\configs\tsv">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\configs\txt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\configs\unlv">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\osd.traineddata">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\pdf.ttf">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="tessdata\vie.traineddata">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Views\ChangCasePopup.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\BulkOcrPopup.xaml.cs">
+	    <DependentUpon>BulkOcrPopup.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\OemPopup.xaml.cs">
+	    <DependentUpon>OemPopup.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\OcrLanguagePopup.xaml.cs">
+	    <DependentUpon>OcrLanguagePopup.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\PsmPopup.xaml.cs">
+	    <DependentUpon>PsmPopup.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Views\PsmPopup.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="ViewModels\PsmViewModel.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="ViewModels\RadioButtonViewModel.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Views\PsmPopup.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Views\OemPopup.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Views\OemPopup.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Views\BulkOcrPopup.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Views\ComboBox.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="ViewModels\BulkOCRModelView.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Options.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="ViewModels\PostProcessingViewModel.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Icons\fatcow\cancel.png" />
+	  <None Remove="Icons\fatcow\document_page_next.png" />
+	  <None Remove="Icons\fatcow\document_page_previous.png" />
+	  <None Remove="Icons\fatcow\draw_eraser.png" />
+	  <None Remove="Icons\fatcow\find.png" />
+	  <None Remove="Icons\fatcow\gear_in.png" />
+	  <None Remove="Icons\fatcow\image_paste.png" />
+	  <None Remove="Icons\fatcow\inline_spellcheck.png" />
+	  <None Remove="Icons\fatcow\ocr.png" />
+	  <None Remove="Icons\fatcow\ocr_small.png" />
+	  <None Remove="Icons\fatcow\open.png" />
+	  <None Remove="Icons\fatcow\pilcrow_delete.png" />
+	  <None Remove="Icons\fatcow\rotate_ccw.png" />
+	  <None Remove="Icons\fatcow\rotate_cw.png" />
+	  <None Remove="Icons\fatcow\save.png" />
+	  <None Remove="Icons\fatcow\scan.png" />
+	  <None Remove="Icons\fatcow\tools.png" />
+	  <None Remove="Icons\fatcow\zoom_actual.png" />
+	  <None Remove="Icons\fatcow\zoom_fit.png" />
+	  <None Remove="Icons\fatcow\zoom_in.png" />
+	  <None Remove="Icons\fatcow\zoom_out.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Icons\fatcow\cancel.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\document_page_next.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\document_page_previous.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\draw_eraser.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\find.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\gear_in.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\image_paste.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\inline_spellcheck.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\ocr.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\ocr_small.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\open.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\pilcrow_delete.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\rotate_ccw.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\rotate_cw.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\save.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\scan.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\tools.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\zoom_actual.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\zoom_fit.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\zoom_in.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Icons\fatcow\zoom_out.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Views\PsmPopup - Copy.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Views\OcrLanguagePopup.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="ViewModels\OcrLanguageViewModel.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Models\OcrLanguage.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="ImageGraphicsView.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="ViewModels\ImageViewModel.cs" />
+	</ItemGroup>
+
+</Project>
