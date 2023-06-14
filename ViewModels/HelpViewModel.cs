@@ -1,5 +1,6 @@
-﻿using CommunityToolkit.Mvvm.Input;
-
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.Input;
+using VietOCR.Views;
 
 namespace VietOCR.ViewModels
 {
@@ -8,7 +9,9 @@ namespace VietOCR.ViewModels
         [RelayCommand]
         public async void Help()
         {
-            await Application.Current.MainPage.DisplayAlert("Alert", "Help", "OK");
+            var popup = new HelpPopup();
+
+            await Application.Current.MainPage.ShowPopupAsync(popup);
         }
 
         [RelayCommand]

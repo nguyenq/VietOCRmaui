@@ -69,6 +69,9 @@
 	  <MauiXaml Update="Views\OcrLanguagePopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\HelpPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PsmPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -159,6 +162,9 @@
 	  </Compile>
 	  <Compile Update="Views\OcrLanguagePopup.xaml.cs">
 	    <DependentUpon>OcrLanguagePopup.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\HelpPopup.xaml.cs">
+	    <DependentUpon>HelpPopup.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\PsmPopup.xaml.cs">
 	    <DependentUpon>PsmPopup.xaml</DependentUpon>
@@ -300,10 +306,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <NativeLibs Remove="Views\PsmPopup - Copy.xaml.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <NativeLibs Remove="Views\OcrLanguagePopup.xaml" />
 	</ItemGroup>
 
@@ -321,6 +323,10 @@
 
 	<ItemGroup>
 	  <NativeLibs Remove="ViewModels\ImageViewModel.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <NativeLibs Remove="Views\HelpPopup.xaml" />
 	</ItemGroup>
 
 </Project>
