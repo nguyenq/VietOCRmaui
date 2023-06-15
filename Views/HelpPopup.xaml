@@ -4,25 +4,7 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:Class="VietOCR.Views.HelpPopup">
     <VerticalStackLayout Margin="10">
-        <WebView x:Name="webView">
-            <WebView.Source>
-                <HtmlWebViewSource>
-                    <HtmlWebViewSource.Html>
-                        <![CDATA[
-                        <html>
-                        <head>
-                        </head>
-                        <body>
-                        <h1>.NET MAUI</h1>
-                        <p>The CSS and image are loaded from local files!</p>
-                        <p><a href="readme_cs.html">next page</a></p>
-                        </body>
-                        </html>                    
-                        ]]>
-                    </HtmlWebViewSource.Html>
-                </HtmlWebViewSource>
-            </WebView.Source>
-        </WebView>
+        <WebView Source="readme_cs.html" />
         <HorizontalStackLayout HorizontalOptions="Center">
             <Button Text="Close" Clicked="ButtonClose_Clicked"></Button>
         </HorizontalStackLayout>

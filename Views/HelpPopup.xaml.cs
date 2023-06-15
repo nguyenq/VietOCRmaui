@@ -10,7 +10,6 @@ public partial class HelpPopup : Popup
     public HelpPopup()
 	{
 		InitializeComponent();
-        this.webView.Reload();
     }
 
     private void ButtonClose_Clicked(object sender, EventArgs e) => Close();
